@@ -1,103 +1,150 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Set loaded state after a small delay to allow for initial animations
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 300);
+  }, []);
+
+  const handleDeploy = () => {
+    setIsAnimating(true);
+    
+    // After animation completes, redirect to the website
+    setTimeout(() => {
+      window.location.href = 'https://www.holidaysbybells.com';
+    }, 3000);
+  };
+
+  return (
+    <div className={`min-h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 relative overflow-hidden transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Animated Background Clouds */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="cloud cloud-1"></div>
+        <div className="cloud cloud-2"></div>
+        <div className="cloud cloud-3"></div>
+        <div className="cloud cloud-4"></div>
+        <div className="cloud cloud-5"></div>
+        <div className="cloud cloud-6"></div>
+      </div>
+      
+      {/* Background Airplanes */}
+      <div className="absolute w-full h-full overflow-hidden pointer-events-none">
+        <div className="bg-airplane bg-airplane-1"></div>
+        <div className="bg-airplane bg-airplane-2"></div>
+        <div className="bg-airplane bg-airplane-3"></div>
+      </div>
+      
+      {/* World Map Background */}
+      <div className="absolute opacity-30 w-full h-full flex items-center justify-center pointer-events-none">
+        <div className="w-[700px] h-[350px] bg-contain bg-center bg-no-repeat">
+          <Image src="/world-map.svg" alt="World Map" width={700} height={350} className="opacity-70" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Animated Airplane */}
+      <div className={`airplane ${isAnimating ? 'airplane-fly' : ''}`}>
+        <div className="relative w-16 h-16 md:w-20 md:h-20">
+          <Image src="/file.svg" alt="Airplane" width={80} height={80} className="transform -rotate-12 filter drop-shadow-lg" />
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
+        <div className="bg-white/20 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-2xl border border-white/30 max-w-lg w-full transform transition-all duration-700 hover:shadow-blue-400/30 hover:shadow-xl">
+          {/* Logo Element */}
+          <div className="mb-8 flex justify-center">
+            <div className="relative px-6 py-4 rounded-xl bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-md border border-white/20 shadow-lg">
+              <div className="w-auto h-auto flex items-center justify-center">
+                <Image src="/logo.png" alt="Holidays By Bells Logo" width={280} height={70} priority className="drop-shadow-lg" />
+              </div>
+              <div className="absolute inset-0 w-full h-full rounded-xl animate-pulse opacity-20 bg-yellow-300/10"></div>
+            </div>
+          </div>
+          
+          {/* Welcome Text */}
+          <h1 className="text-white text-2xl md:text-3xl font-bold mb-4 animate-fade-in">
+            Welcome To Our Official Website Launch
+          </h1>
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-yellow-300/50 to-transparent my-6 mx-auto"></div>
+          <p className="text-blue-50 text-xl md:text-2xl mb-8 animate-fade-in-delay opacity-90 font-light">
+            <span className="font-semibold text-yellow-100">Unlock the World with Bells</span>
+          </p>
+          
+          {/* Travel Icons */}
+          <div className="flex justify-center space-x-6 mb-8 animate-bounce-icons">
+            <span className="text-3xl animate-spin-slow">🌍</span>
+            <span className="text-3xl animate-pulse">🏖️</span>
+            <span className="text-3xl animate-bounce">🎒</span>
+            <span className="text-3xl animate-pulse">🏔️</span>
+            <span className="text-3xl animate-spin-slow">✈️</span>
+          </div>
+
+          {/* Deploy Button */}
+          <button
+            onClick={handleDeploy}
+            disabled={isAnimating}
+            className={`
+              w-full py-5 px-10 text-xl font-bold rounded-full transition-all duration-300 transform
+              ${isAnimating 
+                ? 'bg-green-500 text-white scale-95 cursor-not-allowed' 
+                : 'bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white hover:scale-105 hover:shadow-lg active:scale-95'
+              }
+              shadow-xl border-2 border-yellow-200/30 relative overflow-hidden group
+            `}
+          >
+            {/* Button Background Animation */}
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-yellow-300 to-amber-400 opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
+            
+            {/* Button Content */}
+            <div className="relative z-10 flex items-center justify-center">
+              {isAnimating ? (
+                <span className="flex items-center justify-center">
+                  <svg className="animate-spin -ml-1 mr-3 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Deploying...</span>
+                </span>
+              ) : (
+                <span className="flex items-center justify-center">
+                  <span className="mr-2">Deploy</span>
+                  <span className="transform group-hover:translate-x-1 transition-transform duration-200">→</span>
+                </span>
+              )}
+            </div>
+          </button>
+
+          {/* Animation Status */}
+          {isAnimating && (
+            <div className="mt-6 text-center">
+              <p className="text-yellow-100 text-lg font-medium animate-pulse">
+                🚀 Launching your adventure portal...
+              </p>
+              <div className="mt-4 w-full bg-white/30 rounded-full h-2 overflow-hidden">
+                <div className="bg-gradient-to-r from-yellow-400 to-amber-500 h-full animate-progress"></div>
+              </div>
+            </div>
+          )}
+          
+          {/* Footer Text */}
+          <p className="text-blue-100/80 text-sm mt-8">
+            Unlock the World with Bells - Your gateway to incredible travel experiences
+          </p>
+        </div>
+        
+        {/* Attribution */}
+        <div className="absolute bottom-4 text-blue-100/60 text-xs">
+          © {new Date().getFullYear()} Holidays By Bells. All rights reserved.
+        </div>
+      </div>
     </div>
   );
 }

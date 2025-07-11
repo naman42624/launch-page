@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-text { font-family: Arial, sans-serif; font-weight: bold; }
+    .logo-text-large { font-size: 100px; }
+    .logo-text-small { font-size: 80px; font-style: italic; }
+  </style>
+  <defs>
+    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFDD4A"/>
+      <stop offset="50%" stop-color="#FFCC33"/>
+      <stop offset="100%" stop-color="#FFAA00"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- B with airplane -->
+  <g transform="translate(0, 0)">
+    <!-- Large B -->
+    <text x="30" y="120" class="logo-text logo-text-large" fill="url(#gold-gradient)" style="font-size: 140px;">B</text>
+    
+    <!-- Airplane -->
+    <g transform="translate(65, 30) rotate(30)">
+      <path d="M0,0 L25,0 L30,5 L25,10 L0,10 L5,5 Z" fill="url(#gold-gradient)"/>
+      <circle cx="5" cy="5" r="2" fill="url(#gold-gradient)"/>
+    </g>
+    
+    <!-- Arc around B -->
+    <path d="M60,30 A70,70 0 0 1 60,150" stroke="url(#gold-gradient)" fill="none" stroke-width="8"/>
+  </g>
+
+  <!-- HOLIDAYS -->
+  <text x="170" y="110" class="logo-text logo-text-large" fill="url(#gold-gradient)">HOLIDAYS</text>
+  
+  <!-- By Bells -->
+  <text x="420" y="180" class="logo-text logo-text-small" fill="url(#gold-gradient)">By Bells</text>
+</svg>

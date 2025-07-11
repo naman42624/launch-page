@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M150,150 C200,120 250,180 300,150 C350,120 400,180 450,150 C500,120 550,180 600,150" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.5" fill="none"/>
+  <path d="M100,200 C150,220 200,180 250,200 C300,220 350,180 400,200 C450,220 500,180 550,200" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.5" fill="none"/>
+  <path d="M200,250 C250,270 300,230 350,250 C400,270 450,230 500,250" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.5" fill="none"/>
+  
+  <!-- Dots representing cities/destinations -->
+  <circle cx="200" cy="150" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="300" cy="150" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="450" cy="150" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="550" cy="150" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  
+  <circle cx="150" cy="200" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="250" cy="200" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="350" cy="200" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="450" cy="200" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+  
+  <circle cx="250" cy="250" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="350" cy="250" r="5" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="450" cy="250" r="4" fill="#FFFFFF" fill-opacity="0.7"/>
+  
+  <!-- Flight paths -->
+  <path d="M200,150 Q250,120 300,150" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2,2" fill="none"/>
+  <path d="M300,150 Q375,100 450,150" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2,2" fill="none"/>
+  <path d="M250,200 Q300,170 350,200" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2,2" fill="none"/>
+  <path d="M350,250 Q400,220 450,250" stroke="#FFFFFF" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2,2" fill="none"/>
+</svg>

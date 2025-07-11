@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Holidays By Bells - Launch Page
+
+This is a Next.js project for the launch page of **Holidays By Bells** - a travel and flight booking portal.
+
+## Features
+
+- 🎯 **Clean Launch Page**: Welcome message with prominent deploy button
+- ✈️ **Flight Animations**: Airplane flying animation on button click
+- ☁️ **Cloud Animations**: Floating clouds background effect
+- 🌍 **Travel Theme**: Travel-themed icons and animations
+- 📱 **Responsive Design**: Mobile-friendly layout
+- 🚀 **Deploy Function**: Redirects to holidaysbybells.com after animation
+
+## Technologies Used
+
+- Next.js 15.3.5 with App Router
+- React 19 with TypeScript
+- Tailwind CSS for styling
+- Custom CSS animations for travel effects
 
 ## Getting Started
 
@@ -16,7 +34,25 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+
+- `src/app/page.tsx` - Main launch page component
+- `src/app/globals.css` - Global styles and animations
+- `src/app/layout.tsx` - App layout and metadata
+
+## Deploy Button Functionality
+
+When the "Deploy" button is clicked:
+1. Shows airplane flying animation
+2. Displays loading state with spinner
+3. After 3 seconds, redirects to holidaysbybells.com
+
+## Animations
+
+- **Clouds**: Continuously floating across the screen
+- **Airplane**: Flies across screen when deploy button is clicked
+- **Travel Icons**: Bounce and spin animations
+- **Button**: Hover effects and loading states
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
