@@ -194,24 +194,33 @@ body {
 }
 
 .airplane-fly {
-  animation: fly 3s ease-in-out forwards;
+  animation: fly 10s ease-in-out forwards;
 }
 
 @keyframes fly {
   0% {
     transform: translateX(-100px) translateY(0px) rotate(0deg);
+    opacity: 1;
   }
   25% {
     transform: translateX(25vw) translateY(-50px) rotate(10deg);
+    opacity: 1;
   }
   50% {
     transform: translateX(50vw) translateY(-30px) rotate(-5deg);
+    opacity: 1;
   }
   75% {
     transform: translateX(75vw) translateY(-70px) rotate(15deg);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(calc(90vw)) translateY(-90px) rotate(5deg);
+    opacity: 1;
   }
   100% {
     transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(0deg);
+    opacity: 0;
   }
 }
 
@@ -280,22 +289,13 @@ body {
   0% {
     width: 0%;
   }
-  25% {
-    width: 40%;
-  }
-  50% {
-    width: 60%;
-  }
-  75% {
-    width: 80%;
-  }
   100% {
     width: 100%;
   }
 }
 
 .animate-progress {
-  animation: progress 3s ease-in-out forwards;
+  animation: progress 10s ease-in-out forwards;
 }
 
 /* Background Airplanes */

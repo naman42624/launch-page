@@ -6,6 +6,7 @@ import Image from 'next/image';
 export default function Home() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     // Set loaded state after a small delay to allow for initial animations
@@ -14,13 +15,27 @@ export default function Home() {
     }, 300);
   }, []);
 
+  // Countdown effect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    
+    if (isAnimating && countdown > 0) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (isAnimating && countdown === 0) {
+      // Redirect when countdown reaches zero
+      window.location.href = 'https://www.holidaysbybells.com';
+    }
+    
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isAnimating, countdown]);
+
   const handleDeploy = () => {
     setIsAnimating(true);
-    
-    // After animation completes, redirect to the website
-    setTimeout(() => {
-      window.location.href = 'https://www.holidaysbybells.com';
-    }, 3000);
+    setCountdown(10);
   };
 
   return (
@@ -111,7 +126,7 @@ export default function Home() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span>Deploying...</span>
+                  <span>Preparing for takeoff...</span>
                 </span>
               ) : (
                 <span className="flex items-center justify-center">
@@ -125,11 +140,38 @@ export default function Home() {
           {/* Animation Status */}
           {isAnimating && (
             <div className="mt-6 text-center">
-              <p className="text-yellow-100 text-lg font-medium animate-pulse">
-                🚀 Launching your adventure portal...
-              </p>
+              <div className="flex items-center justify-center gap-4">
+                <p className="text-yellow-100 text-lg font-medium">
+                  🚀 Launching your adventure portal in
+                </p>
+                <div className="bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-yellow-300/30 relative overflow-hidden">
+                  <span className="text-yellow-200 text-xl font-bold animate-pulse">{countdown}</span>
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                    <circle 
+                      cx="50" cy="50" r="40" 
+                      fill="none" 
+                      stroke="rgba(250, 204, 21, 0.3)" 
+                      strokeWidth="8"
+                    />
+                    <circle 
+                      cx="50" cy="50" r="40" 
+                      fill="none" 
+                      stroke="rgba(250, 204, 21, 0.7)" 
+                      strokeWidth="8"
+                      strokeDasharray="251.2"
+                      strokeDashoffset={251.2 * countdown / 10}
+                      strokeLinecap="round"
+                      transform="rotate(-90 50 50)"
+                      className="transition-all duration-1000 ease-linear"
+                    />
+                  </svg>
+                </div>
+              </div>
               <div className="mt-4 w-full bg-white/30 rounded-full h-2 overflow-hidden">
-                <div className="bg-gradient-to-r from-yellow-400 to-amber-500 h-full animate-progress"></div>
+                <div 
+                  className="bg-gradient-to-r from-yellow-400 to-amber-500 h-full transition-all duration-1000 ease-linear" 
+                  style={{ width: `${(10 - countdown) * 10}%` }}
+                ></div>
               </div>
             </div>
           )}
