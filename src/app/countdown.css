@@ -1,0 +1,18 @@
+@keyframes countScale {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.count-animation {
+  animation: countScale 0.9s ease-out;
+}

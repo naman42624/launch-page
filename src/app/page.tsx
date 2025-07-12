@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import './countdown.css';
 
 export default function Home() {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -39,7 +40,70 @@ export default function Home() {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 relative overflow-hidden transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+    <>
+      {/* Full Screen Countdown Overlay */}
+      {isAnimating && (
+        <div className="fixed inset-0 bg-gradient-to-br from-blue-900/95 via-black/90 to-amber-900/95 backdrop-blur-md z-50 flex items-center justify-center flex-col transition-all duration-500">
+          {/* Background Airplane Silhouettes */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <div className="absolute top-[10%] left-0 w-20 h-20 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/file.svg')" }}></div>
+            <div className="absolute top-[30%] right-0 w-16 h-16 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/file.svg')" }}></div>
+            <div className="absolute bottom-[20%] left-[20%] w-12 h-12 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/file.svg')" }}></div>
+            <div className="absolute top-[60%] right-[30%] w-14 h-14 bg-contain bg-no-repeat bg-center" style={{ backgroundImage: "url('/file.svg')" }}></div>
+          </div>
+          
+          {/* Logo */}
+          <div className="absolute top-10 w-48">
+            <Image src="/logo.png" alt="Holidays By Bells Logo" width={200} height={50} priority className="opacity-70" />
+          </div>
+          
+          {/* Countdown Number */}
+          <div className="relative">
+            <div key={countdown} className="text-[15rem] md:text-[20rem] font-bold text-yellow-400 transition-all duration-300 count-animation">
+              {countdown}
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg className="w-[20rem] md:w-[25rem] h-[20rem] md:h-[25rem]" viewBox="0 0 100 100">
+                <circle 
+                  cx="50" cy="50" r="45" 
+                  fill="none" 
+                  stroke="rgba(250, 204, 21, 0.15)" 
+                  strokeWidth="5"
+                />
+                <circle 
+                  cx="50" cy="50" r="45" 
+                  fill="none" 
+                  stroke="rgba(250, 204, 21, 0.7)" 
+                  strokeWidth="5"
+                  strokeDasharray="282.7"
+                  strokeDashoffset={282.7 * countdown / 10}
+                  strokeLinecap="round"
+                  transform="rotate(-90 50 50)"
+                  className="transition-all duration-1000 ease-linear"
+                />
+              </svg>
+            </div>
+          </div>
+          
+          {/* Status Text */}
+          <p className="text-2xl md:text-3xl text-white/80 mt-8 animate-pulse">
+            {countdown > 5 ? "Preparing for takeoff..." : "Launching soon..."}
+          </p>
+          
+          {/* Progress Bar */}
+          <div className="w-72 md:w-96 h-2 bg-white/30 rounded-full mt-8 overflow-hidden">
+            <div 
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 h-full transition-all duration-1000 ease-linear" 
+              style={{ width: `${(10 - countdown) * 10}%` }}
+            ></div>
+          </div>
+          
+          {/* Tagline */}
+          <p className="text-yellow-100/70 mt-12 text-lg">Unlock the World with Bells</p>
+        </div>
+      )}
+      
+      <div className={`min-h-screen bg-gradient-to-br from-blue-400 via-blue-500 to-blue-700 relative overflow-hidden transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       {/* Animated Background Clouds */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="cloud cloud-1"></div>
@@ -140,39 +204,9 @@ export default function Home() {
           {/* Animation Status */}
           {isAnimating && (
             <div className="mt-6 text-center">
-              <div className="flex items-center justify-center gap-4">
-                <p className="text-yellow-100 text-lg font-medium">
-                  🚀 Launching your adventure portal in
-                </p>
-                <div className="bg-white/20 backdrop-blur-sm rounded-full w-12 h-12 flex items-center justify-center border border-yellow-300/30 relative overflow-hidden">
-                  <span className="text-yellow-200 text-xl font-bold animate-pulse">{countdown}</span>
-                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                    <circle 
-                      cx="50" cy="50" r="40" 
-                      fill="none" 
-                      stroke="rgba(250, 204, 21, 0.3)" 
-                      strokeWidth="8"
-                    />
-                    <circle 
-                      cx="50" cy="50" r="40" 
-                      fill="none" 
-                      stroke="rgba(250, 204, 21, 0.7)" 
-                      strokeWidth="8"
-                      strokeDasharray="251.2"
-                      strokeDashoffset={251.2 * countdown / 10}
-                      strokeLinecap="round"
-                      transform="rotate(-90 50 50)"
-                      className="transition-all duration-1000 ease-linear"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="mt-4 w-full bg-white/30 rounded-full h-2 overflow-hidden">
-                <div 
-                  className="bg-gradient-to-r from-yellow-400 to-amber-500 h-full transition-all duration-1000 ease-linear" 
-                  style={{ width: `${(10 - countdown) * 10}%` }}
-                ></div>
-              </div>
+              <p className="text-yellow-100 text-lg font-medium animate-pulse">
+                🚀 Launching your adventure portal...
+              </p>
             </div>
           )}
           
@@ -188,5 +222,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 }
